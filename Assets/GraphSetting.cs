@@ -12,6 +12,8 @@ public class GraphSetting : MonoBehaviour
     [HideInInspector] public int pointsCount = 0; //頂点の数
 
     private float CircleColliderRadius;
+
+    //!LineRenderer系の設定
     public void ChangeLineColor(Gradient LineColor)
     {
         lineRenderer.colorGradient = LineColor;
@@ -31,6 +33,7 @@ public class GraphSetting : MonoBehaviour
         CircleColliderRadius = width / 2f;
     }
 
+    //!関数を描画するときに使う→GraphDraw.cs
     public void AddPoint(Vector2 newPoint)
     {
         points.Add(newPoint);
@@ -62,9 +65,9 @@ public class GraphSetting : MonoBehaviour
     {
         rigidBody.constraints = RigidbodyConstraints2D.None; //制限解除
     }
-    void OnTriggerEnterh2D(Collider2D col)
+    void OnTriggerEnter2D(Collider2D col)
     { //画面外にグラフが出たらオブジェクト削除
-        if (col.gameObject.tag == "DeleteGraph")
+        if (col.gameObject.tag == "DethBlock")
         {
             Destroy(this.gameObject);
         }

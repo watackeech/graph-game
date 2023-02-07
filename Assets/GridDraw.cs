@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GridDraw : MonoBehaviour
 {
-    public GameObject GridPrefabs;
+    public GameObject GridPrefab;
     public GameObject AxisCountPrefab;
     public int centerX = 0;
     public int centerY = 0;
@@ -18,9 +18,12 @@ public class GridDraw : MonoBehaviour
     private int xEnd;
     private int yStart;
     private int yEnd;
-    public float firstWidth = 0.12f;
-    public float secondWidth = 0.08f;
-    public float thirdWidth = 0.06f;
+    private float firstWidth = 0.12f;
+    private float firstAlpha = 0.9f;
+    private float secondWidth = 0.08f;
+    private float secondAlpha = 0.6f;
+    private float thirdWidth = 0.06f;
+    private float thirdAlpha = 0.3f;
 
     private float LineWidth;
     // public Gradient LineColor;
@@ -39,21 +42,20 @@ public class GridDraw : MonoBehaviour
 
     void DrawGrid()
     {
-        //x軸
-        // for(int i = -5; i < 6; i++)
-        Debug.Log(xStart);
+        //! x軸の描画
         for (int i = xStart; i < xEnd + 1; i++)
         {
-            currentGrid = Instantiate(GridPrefabs, this.transform).GetComponent<GridSetting>();
+            //GridPrefabをインスタンス化して、GridSettingコンポーネントを取得
+            currentGrid = Instantiate(GridPrefab, this.transform).GetComponent<GridSetting>();
             if (i == centerX)
             {
                 currentGrid.SetLineWidth(firstWidth);
-                currentGrid.SetLineAlpha(0.9f);
+                currentGrid.SetLineAlpha(firstAlpha);
             }
-            else if ((i - centerX) % 5 == 0)
+            else if ((i - centerX) % 5 == 0) // 5の倍数ごとに太めの線（Second)を
             {
                 currentGrid.SetLineWidth(secondWidth);
-                currentGrid.SetLineAlpha(0.6f);
+                currentGrid.SetLineAlpha(secondAlpha);
                 GameObject currentAxisCount = Instantiate(AxisCountPrefab, new Vector3(i, centerY - 0.5f, 0), Quaternion.identity);
                 currentAxisCount.transform.SetParent(this.gameObject.transform);
                 currentAxisCount.transform.localScale = new Vector3(0.18f, 0.18f, 1);
@@ -62,7 +64,7 @@ public class GridDraw : MonoBehaviour
             else
             {
                 currentGrid.SetLineWidth(thirdWidth);
-                currentGrid.SetLineAlpha(0.3f);
+                currentGrid.SetLineAlpha(thirdAlpha);
             }
             // currentGrid.AddPoint(new Vector3(-9, i, 0));
             // currentGrid.AddPoint(new Vector3(9, i, 0));
@@ -74,16 +76,16 @@ public class GridDraw : MonoBehaviour
         // for(int i = -9; i < 10; i++)
         for (int i = yStart; i < yEnd + 1; i++)
         {
-            currentGrid = Instantiate(GridPrefabs, this.transform).GetComponent<GridSetting>(); ;
+            currentGrid = Instantiate(GridPrefab, this.transform).GetComponent<GridSetting>(); ;
             if (i == centerY)
             {
                 currentGrid.SetLineWidth(firstWidth);
-                currentGrid.SetLineAlpha(0.9f);
+                currentGrid.SetLineAlpha(firstAlpha);
             }
             else if ((i - centerY) % 5 == 0)
             {
                 currentGrid.SetLineWidth(secondWidth);
-                currentGrid.SetLineAlpha(0.6f);
+                currentGrid.SetLineAlpha(secondAlpha);
                 GameObject currentAxisCount = Instantiate(AxisCountPrefab, new Vector3(0.5f + centerX, i, 0), Quaternion.identity);
                 currentAxisCount.transform.SetParent(this.gameObject.transform);
                 currentAxisCount.transform.localScale = new Vector3(0.18f, 0.18f, 1);
@@ -92,7 +94,7 @@ public class GridDraw : MonoBehaviour
             else
             {
                 currentGrid.SetLineWidth(thirdWidth);
-                currentGrid.SetLineAlpha(0.3f);
+                currentGrid.SetLineAlpha(thirdAlpha);
             }
             // currentGrid.AddPoint(new Vector3(i, -5, 0));
             // currentGrid.AddPoint(new Vector3(i, 5, 0));

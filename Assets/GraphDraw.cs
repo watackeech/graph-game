@@ -22,32 +22,6 @@ public class GraphDraw : MonoBehaviour
         // centerY = GameObject.Find("GridController").GetComponent<GridDraw>().centerY;
 
     }
-
-    public void UpdateInputA(string a)
-    {
-        if (float.TryParse(a, out inputA))
-        {
-            Debug.Log(inputA);
-            DrawGraph();
-        }
-        else
-        {
-            Debug.Log("UpdateInputA couldn't parse a string...");
-        }
-    }
-
-    public void UpdateInputB(string b)
-    {
-        if (float.TryParse(b, out inputB))
-        {
-            Debug.Log(inputB);
-            DrawGraph();
-        }
-        else
-        {
-            Debug.Log("UpdateInputB couldn't parse a string...");
-        }
-    }
     void InstantiateGraph()
     {
         // rangeErrorText.text = "";
@@ -56,8 +30,7 @@ public class GraphDraw : MonoBehaviour
         currentLineScript.SetLineColor(previewLineColor);
         currentLineScript.SetLineWidth(lineWidth);
     }
-
-    void DrawGraph()
+    void Draw()
     {
         InstantiateGraph();
         float minX = -5;
@@ -85,4 +58,30 @@ public class GraphDraw : MonoBehaviour
         }
     }
 
+    //!変数が変更された時の処理
+    public void UpdateInputA(string a)
+    {
+        if (float.TryParse(a, out inputA))
+        {
+            Debug.Log(inputA);
+            Draw();
+        }
+        else
+        {
+            Debug.Log("UpdateInputA couldn't parse a string...");
+        }
+    }
+
+    public void UpdateInputB(string b)
+    {
+        if (float.TryParse(b, out inputB))
+        {
+            Debug.Log(inputB);
+            Draw();
+        }
+        else
+        {
+            Debug.Log("UpdateInputB couldn't parse a string...");
+        }
+    }
 }

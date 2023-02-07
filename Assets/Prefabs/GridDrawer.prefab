@@ -30,13 +30,14 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 113.404205}
   m_LocalScale: {x: 0.035547443, y: 0.035547443, z: 0.035547443}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.018138774, y: 2.509673}
+  m_AnchoredPosition: {x: -0.018127441, y: 2.509674}
   m_SizeDelta: {x: 800, y: 450.1027}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2019336188675328887
@@ -48,20 +49,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2019336188675328884}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e21fda64599dce4da5f3b6627271c5f, type: 3}
+  m_Script: {fileID: 11500000, guid: 30a48584a5d76434aa6c9e2839a6d035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GridPrefabs: {fileID: 7061607542655609567, guid: ed43cee7358cc0a4f88f2f16460f893d, type: 3}
-  AxisCountPrefab: {fileID: 6744808693050025978, guid: d21bae5ea7a558241a51d3d4672c3f27, type: 3}
+  GridPrefab: {fileID: 7061607542655609567, guid: 0a8149091c3c64a8189f085acf1ea04e, type: 3}
+  AxisCountPrefab: {fileID: 6744808693050025978, guid: e54962e96f6294c01b4cb49cf37c7d43, type: 3}
   centerX: 0
   centerY: 0
-  xStartRelative: -25
-  xEndRelative: 25
-  yStartRelative: -15
-  yEndRelative: 15
-  firstWidth: 0.12
-  secondWidth: 0.08
-  thirdWidth: 0.06
+  xStartRelative: -22
+  xEndRelative: 22
+  yStartRelative: -14
+  yEndRelative: 14
 --- !u!223 &2019336188675328883
 Canvas:
   m_ObjectHideFlags: 0
@@ -105,7 +103,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &2019336188675328881
 MonoBehaviour:
   m_ObjectHideFlags: 0
