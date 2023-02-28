@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2019336188675328886}
-  - component: {fileID: 2019336188675328887}
   - component: {fileID: 2019336188675328883}
   - component: {fileID: 2019336188675328880}
   - component: {fileID: 2019336188675328881}
+  - component: {fileID: 3882417294289127709}
   m_Layer: 0
   m_Name: GridDrawer
   m_TagString: Untagged
@@ -40,26 +40,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.018127441, y: 2.509674}
   m_SizeDelta: {x: 800, y: 450.1027}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2019336188675328887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2019336188675328884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30a48584a5d76434aa6c9e2839a6d035, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GridPrefab: {fileID: 7061607542655609567, guid: 0a8149091c3c64a8189f085acf1ea04e, type: 3}
-  AxisCountPrefab: {fileID: 6744808693050025978, guid: e54962e96f6294c01b4cb49cf37c7d43, type: 3}
-  centerX: 0
-  centerY: 0
-  xStartRelative: -22
-  xEndRelative: 22
-  yStartRelative: -14
-  yEndRelative: 14
 --- !u!223 &2019336188675328883
 Canvas:
   m_ObjectHideFlags: 0
@@ -103,7 +83,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &2019336188675328881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,3 +101,23 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3882417294289127709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019336188675328884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30a48584a5d76434aa6c9e2839a6d035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GridPrefab: {fileID: 7061607542655609567, guid: 0a8149091c3c64a8189f085acf1ea04e, type: 3}
+  AxisCountPrefab: {fileID: 6744808693050025978, guid: e54962e96f6294c01b4cb49cf37c7d43, type: 3}
+  centerX: 0
+  centerY: 0
+  xStartRelative: -22
+  xEndRelative: 22
+  yStartRelative: -14
+  yEndRelative: 14
