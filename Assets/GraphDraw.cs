@@ -28,7 +28,7 @@ public class GraphDraw : MonoBehaviour
     Dictionary<string, string> errorMessages = new Dictionary<string, string>(){
         {"hide",""},
         {"range","xの範囲を確認してみよう！"},
-        {"valid","数字を入力してるか確認してみよう！"}
+        {"valid","数字を確認してみよう！"}
     };
     void Awake()
     {
@@ -55,6 +55,7 @@ public class GraphDraw : MonoBehaviour
     }
     void Draw()
     {
+        DeletePreview();
         InstantiateGraph();
         // float minX = -5;
         float range = maxX - minX;
@@ -77,11 +78,20 @@ public class GraphDraw : MonoBehaviour
             catch
             {
                 Debug.Log("点打てなかった");
+                currentLineScript.DeleteThisGraph();
             }
         }
+        currentLine.tag = "Preview";
     }
-
-    //!変数が変更された時の処理
+    public void DeletePreview()
+    {
+        GameObject[] previews = GameObject.FindGameObjectsWithTag("Preview");
+        foreach (GameObject preview in previews)
+        {
+            Destroy(preview);
+        }
+    }
+    // 変数が変更された時の処理
     public void UpdateInputA(string a)
     {
         if (float.TryParse(a, out inputA))
@@ -94,7 +104,6 @@ public class GraphDraw : MonoBehaviour
             Debug.Log("UpdateInputA couldn't parse a string...");
         }
     }
-
     public void UpdateInputB(string b)
     {
         if (float.TryParse(b, out inputB))
@@ -126,51 +135,8 @@ public class GraphDraw : MonoBehaviour
             updateErrorMessage("valid");
         }
     }
-    // public void updateMinX()
-    // {
-    //     //inputMinXをint型にParseし、成功すればそれをminXに代入しtrueを返す、失敗すればfalseが返る
-    //     if (float.TryParse(minField.text, out minX))
-    //     {
-    //         if (minX < maxX)
-    //         {
-    //             // Debug.Log($"xの最小値は{minX}");
-    //             hideRangeErrorText();
-    //             Draw();
-    //         }
-    //         else
-    //         {
-    //             showRangeErrorText();
-    //         }
-    //     }
-    // }
-    // public void updateMaxX()
-    // {
-    //     if (float.TryParse(maxField.text, out maxX))
-    //     {
-    //         if (minX < maxX)
-    //         {
-    //             // Debug.Log($"xの最大値は{maxX}");
-    //             updateErrorMessage("hide");
-    //             // ErrorField.text = errorMessages["hides"];
-    //             Draw();
-    //         }
-    //         else
-    //         {
-    //             updateErrorMessage("range");
-    //             // showRangeErrorText();
-    //         }
-    //     }
-    // }
     private void updateErrorMessage(string s)
     {
         ErrorField.text = errorMessages[s];
     }
-    // private void showRangeErrorText()
-    // {
-    //     ErrorField.text = "xの範囲を確認してみよう！";
-    // }
-    // private void hideRangeErrorText()
-    // {
-    //     ErrorField.text = "";
-    // }
 }
