@@ -67,7 +67,7 @@ public class GraphSetting : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D col)
     { //画面外にグラフが出たらオブジェクト削除
-        if (col.gameObject.tag == "DethBlock")
+        if (col.gameObject.tag == "DeathBlock")
         {
             Destroy(this.gameObject);
         }

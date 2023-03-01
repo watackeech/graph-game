@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GraphDraw : MonoBehaviour
 {
@@ -9,18 +11,39 @@ public class GraphDraw : MonoBehaviour
     [SerializeField] private Gradient previewLineColor;
     [SerializeField] private Gradient staticLineColor;
     [SerializeField] private Gradient dynamicLineColor;
+    [HideInInspector] public TMP_InputField minField;
+    [HideInInspector] public TMP_InputField maxField;
+    public GameObject MinFieldObject;
+    public GameObject MaxFieldObject;
+    private float minX;
+    private float maxX;
+    public TMP_Text ErrorField;
     private float inputA = 0;
     private float inputB = 0;
     private float centerX = 0;
     private float centerY = 0;
+
     private GameObject currentLine;
     [HideInInspector] public GraphSetting currentLineScript;
-
+    Dictionary<string, string> errorMessages = new Dictionary<string, string>(){
+        {"hide",""},
+        {"range","xの範囲を確認してみよう！"},
+        {"valid","数字を入力してるか確認してみよう！"}
+    };
+    void Awake()
+    {
+        minField = MinFieldObject.gameObject.GetComponent<TMP_InputField>();
+        maxField = MaxFieldObject.gameObject.GetComponent<TMP_InputField>();
+        minX = float.Parse(minField.text);
+        maxX = float.Parse(maxField.text);
+    }
     void Start()
     {
         // centerX = GameObject.Find("GridController").GetComponent<GridDraw>().centerX;
         // centerY = GameObject.Find("GridController").GetComponent<GridDraw>().centerY;
 
+        // minX = initialMinX;
+        // maxX = initialMaxX;
     }
     void InstantiateGraph()
     {
@@ -33,8 +56,8 @@ public class GraphDraw : MonoBehaviour
     void Draw()
     {
         InstantiateGraph();
-        float minX = -5;
-        float range = 10;
+        // float minX = -5;
+        float range = maxX - minX;
         float y;
         float x = minX;
 
@@ -84,4 +107,70 @@ public class GraphDraw : MonoBehaviour
             Debug.Log("UpdateInputB couldn't parse a string...");
         }
     }
+    public void updateRange()
+    {
+        if (float.TryParse(minField.text, out minX) && float.TryParse(maxField.text, out maxX))
+        {
+            if (minX < maxX)
+            {
+                updateErrorMessage("hide");
+                Draw();
+            }
+            else
+            {
+                updateErrorMessage("range");
+            }
+        }
+        else
+        {
+            updateErrorMessage("valid");
+        }
+    }
+    // public void updateMinX()
+    // {
+    //     //inputMinXをint型にParseし、成功すればそれをminXに代入しtrueを返す、失敗すればfalseが返る
+    //     if (float.TryParse(minField.text, out minX))
+    //     {
+    //         if (minX < maxX)
+    //         {
+    //             // Debug.Log($"xの最小値は{minX}");
+    //             hideRangeErrorText();
+    //             Draw();
+    //         }
+    //         else
+    //         {
+    //             showRangeErrorText();
+    //         }
+    //     }
+    // }
+    // public void updateMaxX()
+    // {
+    //     if (float.TryParse(maxField.text, out maxX))
+    //     {
+    //         if (minX < maxX)
+    //         {
+    //             // Debug.Log($"xの最大値は{maxX}");
+    //             updateErrorMessage("hide");
+    //             // ErrorField.text = errorMessages["hides"];
+    //             Draw();
+    //         }
+    //         else
+    //         {
+    //             updateErrorMessage("range");
+    //             // showRangeErrorText();
+    //         }
+    //     }
+    // }
+    private void updateErrorMessage(string s)
+    {
+        ErrorField.text = errorMessages[s];
+    }
+    // private void showRangeErrorText()
+    // {
+    //     ErrorField.text = "xの範囲を確認してみよう！";
+    // }
+    // private void hideRangeErrorText()
+    // {
+    //     ErrorField.text = "";
+    // }
 }
