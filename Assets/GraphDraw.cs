@@ -13,6 +13,7 @@ public class GraphDraw : MonoBehaviour
     [SerializeField] private Gradient dynamicLineColor;
     [HideInInspector] public TMP_InputField minField;
     [HideInInspector] public TMP_InputField maxField;
+    public bool isDynamic = false;
     public GameObject MinFieldObject;
     public GameObject MaxFieldObject;
     private float minX;
@@ -91,6 +92,12 @@ public class GraphDraw : MonoBehaviour
             Destroy(preview);
         }
     }
+
+    public void CompleteGraph()
+    {
+        currentLine.tag = "StaticGraph";
+        // currentLine.tag = "DynamicGraph";
+    }
     // 変数が変更された時の処理
     public void UpdateInputA(string a)
     {
@@ -116,27 +123,32 @@ public class GraphDraw : MonoBehaviour
             Debug.Log("UpdateInputB couldn't parse a string...");
         }
     }
-    public void updateRange()
+    public void UpdateRange()
     {
         if (float.TryParse(minField.text, out minX) && float.TryParse(maxField.text, out maxX))
         {
             if (minX < maxX)
             {
-                updateErrorMessage("hide");
+                UpdateErrorMessage("hide");
                 Draw();
             }
             else
             {
-                updateErrorMessage("range");
+                UpdateErrorMessage("range");
             }
         }
         else
         {
-            updateErrorMessage("valid");
+            UpdateErrorMessage("valid");
         }
     }
-    private void updateErrorMessage(string s)
+    private void UpdateErrorMessage(string s)
     {
         ErrorField.text = errorMessages[s];
+    }
+    public void ToggleIsDynamic()
+    {
+        isDynamic = !isDynamic;
+        Debug.Log(isDynamic);
     }
 }
