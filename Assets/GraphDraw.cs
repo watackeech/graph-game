@@ -13,6 +13,7 @@ public class GraphDraw : MonoBehaviour
     [SerializeField] private Gradient dynamicLineColor;
     [HideInInspector] public TMP_InputField minField;
     [HideInInspector] public TMP_InputField maxField;
+    public GameObject StartSimulationButton;
     public bool isDynamic = false;
     public GameObject MinFieldObject;
     public GameObject MaxFieldObject;
@@ -48,6 +49,7 @@ public class GraphDraw : MonoBehaviour
         currentLineScript = currentLine.GetComponent<GraphSetting>(); //GraphスクリプトをGraphプレハブから取得
         currentLineScript.SetLineColor(previewLineColor);
         currentLineScript.SetLineWidth(lineWidth);
+        currentLineScript.rigidBody.simulated = false;
     }
     void Draw()
     {
@@ -79,14 +81,6 @@ public class GraphDraw : MonoBehaviour
         }
         currentLine.tag = "Preview";
     }
-    public void DeletePreview()
-    {
-        GameObject[] previews = GameObject.FindGameObjectsWithTag("Preview");
-        foreach (GameObject preview in previews)
-        {
-            Destroy(preview);
-        }
-    }
 
     public void CompleteGraph()
     {
@@ -100,6 +94,9 @@ public class GraphDraw : MonoBehaviour
             currentLine.tag = "StaticGraph";
             currentLineScript.SetLineColor(staticLineColor);
         }
+        currentLineScript.OnCollider();
+        // currentLineScript.rigidBody.simulated = true;
+        currentLine.name = GenerateFuncString(inputA, inputB);
     }
     // 変数が変更された時の処理
     public void UpdateInputA(string a)
@@ -152,5 +149,49 @@ public class GraphDraw : MonoBehaviour
     public void ToggleIsDynamic()
     {
         isDynamic = !isDynamic;
+    }
+    public void StartSimulation()
+    {
+        if (StartSimulationButton.GetComponent<Toggle>().isOn)
+        {
+            //!StaticたちをActiveに
+            //!DynamicたちをActiveに
+            GameObject[] dynamicGraphs = GameObject.FindGameObjectsWithTag("DynamicGraph");
+            foreach (GameObject dynamicG in dynamicGraphs)
+            {
+                dynamicG.GetComponent<GraphSetting>().OnDynamic();
+                dynamicG.GetComponent<GraphSetting>().WakeUp(); //これで起こしてあげないと、Sleep状態に入ってる...
+                // dynamicG.tag = "SimulatedGraph";2
+            }
+            DeletePreview();
+        }
+        else
+        {
+            Draw();
+        }
+    }
+    public void DeletePreview()
+    {
+        GameObject[] previews = GameObject.FindGameObjectsWithTag("Preview");
+        foreach (GameObject preview in previews)
+        {
+            Destroy(preview);
+        }
+    }
+    public void DeleteAllGraphs()
+    {
+        foreach (Transform n in gameObject.transform)
+        {
+            GameObject.Destroy(n.gameObject);
+        }
+        // foreach (Transform n in GraphListContainer.gameObject.transform)
+        // { //リストのほうも全削除
+        //     GameObject.Destroy(n.gameObject);
+        // }
+        // Draw();
+    }
+    private string GenerateFuncString(float a, float b)
+    {
+        return $"y={a.ToString()}x+{b.ToString()}";
     }
 }

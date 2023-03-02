@@ -7,6 +7,8 @@ TagManager:
   - Preview
   - StaticGraph
   - DynamicGraph
+  - Metaball_liquid
+  - SimulatedGraph
   layers:
   - Default
   - TransparentFX

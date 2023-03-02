@@ -60,10 +60,18 @@ public class GraphSetting : MonoBehaviour
         // edgeCollider.enabled = true;
         // circleCollider.enabled = true;
     }
+    public void WakeUp()
+    {
+        if (rigidBody.IsSleeping())
+        {
+            rigidBody.WakeUp();
+        }
+    }
 
     public void OnDynamic()
     {
         rigidBody.constraints = RigidbodyConstraints2D.None; //制限解除
+        Debug.Log("制限解除！");
     }
     void OnTriggerEnter2D(Collider2D col)
     { //画面外にグラフが出たらオブジェクト削除
