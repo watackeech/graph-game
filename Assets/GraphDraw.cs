@@ -90,8 +90,16 @@ public class GraphDraw : MonoBehaviour
 
     public void CompleteGraph()
     {
-        currentLine.tag = "StaticGraph";
-        // currentLine.tag = "DynamicGraph";
+        if (isDynamic)
+        {
+            currentLine.tag = "DynamicGraph";
+            currentLineScript.SetLineColor(dynamicLineColor);
+        }
+        else
+        {
+            currentLine.tag = "StaticGraph";
+            currentLineScript.SetLineColor(staticLineColor);
+        }
     }
     // 変数が変更された時の処理
     public void UpdateInputA(string a)
