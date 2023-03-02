@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 public class SwitchToggle : MonoBehaviour
 {
     [SerializeField] RectTransform uiHandleRectTransform;
     [SerializeField] Color backgroundActiveColor;
     [SerializeField] Color handleActiveColor;
+    public TMP_Text labelField;
 
     Image backgroundImage, handleImage;
 
@@ -44,6 +46,10 @@ public class SwitchToggle : MonoBehaviour
 
         //handleImage.color = on ? handleActiveColor : handleDefaultColor ; // no anim
         handleImage.DOColor(on ? handleActiveColor : handleDefaultColor, .4f);
+
+        //Labelのテキスト変更
+        labelField.text = on ? "動く" : "固定";
+        labelField.color = on ? handleActiveColor : handleDefaultColor;
     }
 
     void OnDestroy()

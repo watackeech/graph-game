@@ -40,11 +40,6 @@ public class GraphDraw : MonoBehaviour
     }
     void Start()
     {
-        // centerX = GameObject.Find("GridController").GetComponent<GridDraw>().centerX;
-        // centerY = GameObject.Find("GridController").GetComponent<GridDraw>().centerY;
-
-        // minX = initialMinX;
-        // maxX = initialMaxX;
     }
     void InstantiateGraph()
     {
@@ -149,6 +144,5 @@ public class GraphDraw : MonoBehaviour
     public void ToggleIsDynamic()
     {
         isDynamic = !isDynamic;
-        Debug.Log(isDynamic);
     }
 }
