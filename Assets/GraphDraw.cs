@@ -15,6 +15,8 @@ public class GraphDraw : MonoBehaviour
     [HideInInspector] public TMP_InputField maxField;
     public GameObject StartSimulationButton;
     public bool isDynamic = false;
+    public GameObject PlusMinusToggle1;
+    public bool isPlus1 = true;
     public GameObject MinFieldObject;
     public GameObject MaxFieldObject;
     private float minX;
@@ -38,6 +40,7 @@ public class GraphDraw : MonoBehaviour
         maxField = MaxFieldObject.gameObject.GetComponent<TMP_InputField>();
         minX = float.Parse(minField.text);
         maxX = float.Parse(maxField.text);
+        isPlus1 = PlusMinusToggle1.GetComponent<Toggle>().isOn;
     }
     void Start()
     {
@@ -65,7 +68,8 @@ public class GraphDraw : MonoBehaviour
             try
             {
                 //開始点に、計算したx,yのベクトルを足すと、新しい点がプロットできる
-                y = inputA * x + inputB;
+                //isPlusの判定
+                y = isPlus1 ? inputA * x + inputB : inputA * x - inputB;
                 if (-50 < y && y < 50)
                 {
                     //開始点に、計算したx,yのベクトルを足すと、新しい点がプロットできる
@@ -193,5 +197,11 @@ public class GraphDraw : MonoBehaviour
     private string GenerateFuncString(float a, float b)
     {
         return $"y={a.ToString()}x+{b.ToString()}";
+    }
+    public void UpdateIsPlus1()
+    {
+        isPlus1 = !isPlus1;
+        Debug.Log(isPlus1);
+        Draw();
     }
 }
